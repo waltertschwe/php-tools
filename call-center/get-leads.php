@@ -1,4 +1,5 @@
 <?php
+
 $user = 'root';
 $password = '%NN6prxt5';
 
@@ -10,10 +11,14 @@ try {
     die();
 }
 
+$startDate = $_POST['startDate'];
+$endDate = $_POST['endDate'];
+
+
 $sql = "SELECT lead_source as 'label', count(lead_source) as 'value' from sugarweb_dev.leads where date_entered between ? and ? GROUP by lead_source";
 
 $stmt = $dbh->prepare($sql);
-$stmt->execute(array('2012-04-21 19:39:02', '2015-04-22 19:39:02'));
+$stmt->execute(array($startDate, $endDate));
 $stmt->execute();
 $leads = array();
 

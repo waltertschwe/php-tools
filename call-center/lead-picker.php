@@ -19,11 +19,13 @@
         $(document).ready(function(){
             $('#generate-report').click(function(e){
             	e.preventDefault();
+            	var startDate = $("#start-date").val();
+            	var endDate = $("#end-date").val();
                 $.ajax({
                     type: "POST",
                     url: 'get-leads.php',
-                    data: { "foo" : "bar "},
-                    success: function(data) {
+                    data: { "startDate" : startDate, "endDate" : endDate},
+                    success: function(data) {              
                     	$('#data').html(data);
                     },
                     error: function(XMLHttpRequest, textStatus, errorThrown) {
@@ -33,13 +35,11 @@
             });
         });
 </script>
-
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
-    
 </head>
 <body>
 	<div id="data"></div>
@@ -103,10 +103,10 @@
 </div>
 <script type="text/javascript">
     $(function () {
-        $('#datetimepicker6').datetimepicker({ format: 'MM/DD/YYYY H:mm'
+        $('#datetimepicker6').datetimepicker({ format: 'YYYY-MM-DD H:mm'
         	     	
         });
-        $('#datetimepicker7').datetimepicker({ format: 'MM/DD/YYYY H:mm'
+        $('#datetimepicker7').datetimepicker({ format: 'YYYY-MM-DD H:mm'
         	
         });
         $("#datetimepicker6").on("dp.change", function (e) {
