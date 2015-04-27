@@ -27,6 +27,8 @@
                     data: { "startDate" : startDate, "endDate" : endDate},
                     success: function(data) {              
                     	$('#data').html(data);
+                    	var fileName = "data/call-center-leads_" + startDate + "-" + endDate + ".csv";
+                    	$('#download-report').html("<a href=\""+fileName+"\"><span class=\"glyphicon glyphicon-file\"></span></a>");
                     },
                     error: function(XMLHttpRequest, textStatus, errorThrown) {
      					alert("failed to get data");
@@ -40,8 +42,14 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
+<style>
+#download-report {
+	 margin-left:auto;
+}
+</style>
 </head>
 <body>
+	
 	<div id="data"></div>
 	 <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
@@ -130,7 +138,8 @@
    </div>
 </div>
 <div class="container">
-	 <div class='col-md-5'>
+	 <div class="col-md-5">
+	 	<div id="download-report" class="report"></div>
      <div id="chartContainer"></div>
    </div>
 </div>

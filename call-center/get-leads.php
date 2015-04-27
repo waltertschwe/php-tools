@@ -27,6 +27,19 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 }
 $data = json_encode($leads);
 
+//build spreadsheet
+$reportName = "call-center-leads_".$startDate."-".$endDate.".csv";
+$fp = fopen('data/'.$reportName, 'w');
+$header = array("Lead Source", "Count");
+fputcsv($fp,$header);
+foreach($leads as $lead) {
+	fputcsv($fp, $lead);
+}
+
+fclose($fp);
+
+
+
 echo '
 <script type="text/javascript">
   FusionCharts.ready(function(){
@@ -38,9 +51,9 @@ echo '
         "dataFormat": "json",
         "dataSource":  {
           "chart": {
-            "caption": "Call center Report",
-            "subCaption": "Date 4/23 - 4/24",
-            "xAxisName": "Source",
+            "caption": "Progyny Call Center Report",
+            "subCaption": "Start Date/Time: '. $startDate . ' End Date/Time:' . $endDate .'",
+            "xAxisName": "Lead Source",
             "yAxisName": "Number of Calls",
             "theme": "fint"
          },
