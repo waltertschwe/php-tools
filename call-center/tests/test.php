@@ -15,41 +15,35 @@
 <script type="text/javascript" src="../js/fusioncharts.js"></script>
 <script type="text/javascript" src="../js/themes/fusioncharts.theme.fint.js"></script>
 
-<<script type="text/javascript">
+<script type="text/javascript">
         $(document).ready(function(){
             $('#generate-report').click(function(e){
             	e.preventDefault();
-            	var startDate = $("#start-date").val();
-            	var endDate = $("#end-date").val();
                 $.ajax({
                     type: "POST",
-                    url: 'get-leads.php',
-                    data: { "startDate" : startDate, "endDate" : endDate},
-                    success: function(data) {              
+                    url: 'test-json.php',
+                    data: { "foo" : "bar "},
+                    success: function(data) {
+                    	alert(data);
+                    	alert("here");
                     	$('#data').html(data);
-                    	var fileName = "data/call-center-leads_" + startDate + "-" + endDate + ".csv";
-                    	$('#download-report').html("<a href=\""+fileName+"\"><span class=\"glyphicon glyphicon-file\"></span></a>");
                     },
                     error: function(XMLHttpRequest, textStatus, errorThrown) {
-     					alert("failed to get data");
+     					alert("some error");
   					}
                 });
             });
         });
 </script>
+
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
-<style>
-#download-report {
-	 margin-left:auto;
-}
-</style>
+    
 </head>
 <body>
-	
 	<div id="data"></div>
 	 <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
@@ -78,7 +72,7 @@
 <div class="container">
     <div class="page-header">
     	<div class="container">
-      <h3><a href="../">Data Dashboard</a> > Call Center > Lead Source</h3>  
+      <h3><a href="">Data Dashboard</a> > Call Center > Lead Picker</h3>  
     </div>
 </div>
 <div class="container">
@@ -111,10 +105,10 @@
 </div>
 <script type="text/javascript">
     $(function () {
-        $('#datetimepicker6').datetimepicker({ format: 'YYYY-MM-DD H:mm'
+        $('#datetimepicker6').datetimepicker({ format: 'MM/DD/YYYY H:mm'
         	     	
         });
-        $('#datetimepicker7').datetimepicker({ format: 'YYYY-MM-DD H:mm'
+        $('#datetimepicker7').datetimepicker({ format: 'MM/DD/YYYY H:mm'
         	
         });
         $("#datetimepicker6").on("dp.change", function (e) {
@@ -128,7 +122,7 @@
 <div class="container">
 	<div class="form-group">
     <div class='col-md-5'>
-   		<button id="generate-report" name="submit" class="btn btn-lg btn-primary">Generate Report</button>
+   		<button id="generate-report" class="btn btn-lg btn-primary">Generate Report</button>
     </div>
 </div>
 </form>
@@ -138,8 +132,7 @@
    </div>
 </div>
 <div class="container">
-	 <div class="col-md-5">
-	 	<div id="download-report" class="report"></div>
+	 <div class='col-md-5'>
      <div id="chartContainer"></div>
    </div>
 </div>
